@@ -1,0 +1,38 @@
+{
+	"name": "readthedocs-vscode",
+	"displayName": "ReadTheDocs Snippets",
+	"publisher": "gep13",
+	"description": "Set of snippets for helping with creating documentation for ReadTheDocs.",
+	"version": "0.1.0",
+	"icon": "images/readthedocs.png",
+	"private": true,
+	"author": {
+		"name": "gep13"
+	},
+	"bugs": {
+		"url": "https://github.com/gep13/readthedocs-vscode/issues"
+  },
+  "homepage": "https://github.com/gep13/readthedocs-vscode",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/gep13/readthedocs-vscode"
+	},
+	"galleryBanner": {
+        "color": "#FFE05C",
+        "theme": "light"
+  },
+	"engines": {
+		"vscode": "^0.10.1"
+	},
+	"categories": [
+		"Snippets"
+	],
+	"contributes": {
+		"snippets": [
+            {
+                "language": "markdown",
+                "path": "./snippets/snippets.json"
+            }
+        ]
+	}
+}
