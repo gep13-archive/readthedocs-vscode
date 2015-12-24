@@ -3,7 +3,7 @@
 	"displayName": "ReadTheDocs Snippets",
 	"publisher": "gep13",
 	"description": "Set of snippets for helping with creating documentation for ReadTheDocs.",
-	"version": "0.1.0",
+	"version": "0.2.0",
 	"icon": "images/readthedocs.png",
 	"private": true,
 	"author": {
@@ -31,7 +31,7 @@
 		"snippets": [
             {
                 "language": "markdown",
-                "path": "./snippets/snippets.json"
+                "path": "./snippets/markdown.json"
             }
         ]
 	}
