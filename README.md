@@ -20,9 +20,13 @@ This will create a callout similar to the following:
 
 ## rtdNote
 
+This will create a callout similar to the following:
+
 ![Note Callout](https://raw.githubusercontent.com/gep13/readthedocs-vscode/master/images/Note-Callout.png)
 
 ## rtdError
+
+This will create a callout similar to the following:
 
 ![Error Callout](https://raw.githubusercontent.com/gep13/readthedocs-vscode/master/images/Error-Callout.png)
 
