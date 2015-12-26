@@ -33,3 +33,7 @@ This will create a callout similar to the following:
 # Contribution
 
 If you would like to see any other snippet added for this VS Code Extension, feel free to raise an [issue](https://github.com/gep13/readthedocs-vscode/issues).
+
+# Releases
+
+To find out what was released in each version of this extension, check out the [releases](https://github.com/gep13/readthedocs-vscode/releases) page.
