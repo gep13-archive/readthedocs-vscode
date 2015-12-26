@@ -23,7 +23,7 @@
             "prefix": "rtdError",
             "body": [
                 "<div class=\"admonition error\">",
-                "\t<p class=\"first admonition-title\">Note</p>",
+                "\t<p class=\"first admonition-title\">Error</p>",
                 "\t<p class=\"last\">$0</p>",
                 "</div>"
             ],
