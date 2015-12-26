@@ -3,9 +3,9 @@
             "prefix": "rtdAttention",
             "body": [
                 "<div class=\"admonition attention\">",
-                "\t<p class=\"first admonition-title\">Attention</p>",
+                "\t<p class=\"first admonition-title\">${1:Attention}</p>",
                 "\t<p class=\"last\">",
-                "\t\t$0",
+                "\t\t${2:Enter Callout Text Here}",
                 "\t</p>",
                 "</div>"
             ],
@@ -15,9 +15,9 @@
             "prefix": "rtdNote",
             "body": [
                 "<div class=\"admonition note\">",
-                "\t<p class=\"first admonition-title\">Note</p>",
+                "\t<p class=\"first admonition-title\">${1:Note}</p>",
                 "\t<p class=\"last\">",
-                "\t\t$0",
+                "\t\t${2:Enter Callout Text Here}",
                 "\t</p>",
                 "</div>"
             ],
@@ -27,9 +27,9 @@
             "prefix": "rtdError",
             "body": [
                 "<div class=\"admonition error\">",
-                "\t<p class=\"first admonition-title\">Error</p>",
+                "\t<p class=\"first admonition-title\">${1:Error}</p>",
                 "\t<p class=\"last\">",
-                "\t\t$0",
+                "\t\t${2:Enter Callout Text Here}",
                 "\t</p>",
                 "</div>"
             ],
