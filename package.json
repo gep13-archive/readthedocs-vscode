@@ -3,7 +3,7 @@
 	"displayName": "ReadTheDocs Snippets",
 	"publisher": "gep13",
 	"description": "Set of snippets for helping with creating documentation for ReadTheDocs.",
-	"version": "0.3.0",
+	"version": "0.4.0",
 	"icon": "images/readthedocs.png",
 	"private": true,
 	"author": {
