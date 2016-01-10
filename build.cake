@@ -2,6 +2,7 @@
 // ADDINS
 ///////////////////////////////////////////////////////////////////////////////
 #addin Cake.Json
+#addin Cake.VsCode
 
 ///////////////////////////////////////////////////////////////////////////////
 // ARGUMENTS
@@ -16,6 +17,7 @@ var configuration   = Argument<string>("configuration", "Release");
 
 var packageJsonFile            = "./package.json";
 var version                    = "0.1.0";
+var buildDirectory             = Directory("./.build");
 
 ///////////////////////////////////////////////////////////////////////////////
 // SETUP / TEARDOWN
@@ -42,6 +44,23 @@ Teardown(() =>
 // TASK DEFINITIONS
 ///////////////////////////////////////////////////////////////////////////////
 
+Task("Clean")
+    .Does(() =>
+{
+    CleanDirectories(new DirectoryPath[] {
+        buildDirectory});
+});
+
+Task("Create-Build-Directory")
+    .IsDependentOn("Clean")
+	.Does(() =>
+{
+    if (!DirectoryExists(buildDirectory))
+    {
+        CreateDirectory(buildDirectory);
+    }
+});
+
 Task("Find-Version-Number")
     .Does(() =>
 {
@@ -51,8 +70,21 @@ Task("Find-Version-Number")
     Information("Running GitReleaseManager for version: {0}", version);
 });
 
+Task("Package-Extension")
+    .IsDependentOn("Create-Build-Directory")
+    .IsDependentOn("Find-Version-Number") 
+    .Does(() =>
+{
+    var packageFile = File("readthedocs-vscode-" + version + ".vsix");
+    
+    VscePackage(new VscePackageSettings() {
+        OutputFilePath = buildDirectory + packageFile,
+    });
+});
+
 Task("Create-Release-Notes")
-    .IsDependentOn("Find-Version-Number")  
+    .IsDependentOn("Find-Version-Number")
+    .IsDependentOn("Package-Extension")    
     .Does(() =>
 {
     var userName = EnvironmentVariable("GITHUB_USERNAME");
@@ -60,14 +92,36 @@ Task("Create-Release-Notes")
 
     GitReleaseManagerCreate(userName, password, "gep13", "readthedocs-vscode", new GitReleaseManagerCreateSettings {
         Milestone         = version,
+        Assets            = string.Format("{0}/.build/readthedocs-vscode-{1}.vsix", Context.Environment.WorkingDirectory, version), 
         Name              = version,
-        Prerelease        = false,
+        Prerelease        = true,
         TargetCommitish   = "master"
     });
 });
 
+Task("Publish-Extension")
+    .IsDependentOn("Create-Release-Notes")
+    .Does(() =>
+{
+    var personalAccessToken = EnvironmentVariable("VSCE_PAT");
+    var userName = EnvironmentVariable("GITHUB_USERNAME");
+    var password = EnvironmentVariable("GITHUB_PASSWORD");
+    var packageFile = File("readthedocs-vscode-" + version + ".vsix");
+    
+    VscePublish(new VscePublishSettings(){
+        PersonalAccessToken = personalAccessToken,
+        Package = buildDirectory + packageFile
+    });
+    
+    GitReleaseManagerPublish(userName, password, "gep13", "readthedocs-vscode", version, new GitReleaseManagerPublishSettings {
+    });
+    
+    GitReleaseManagerClose(userName, password, "gep13", "readthedocs-vscode", version, new GitReleaseManagerCloseMilestoneSettings {
+    });
+});
+
 Task("Default")
-    .IsDependentOn("Create-Release-Notes");
+    .IsDependentOn("Package-Extension");
 
 ///////////////////////////////////////////////////////////////////////////////
 // EXECUTION
